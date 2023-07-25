@@ -1,0 +1,254 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Apuntes de Pug
+    body
+    h1 Apuntes de Pug
+p Pug es un motor de plantillas o template engine basado en javascript
+p Sintaxis amigable ya que no hay etiquetas
+p Las identaciones forman parte de la sintaxis 
+p Integracion total con node y con otras tecnologias de Js como react 
+p Soporta completamente HTML
+br
+h2 Sintaxis de Pug
+p se escribe el selector y se agrega el contenido, no es necesario colocar ninguna etiqueta 
+p para definir que un elemento es hijo de otro, simplemente se usa la identacion 
+//- ejemplo
+h1 Hola
+    span mundo 
+p no hay limite de identaciones 
+//- ejemplo 
+div container 
+    div container-2 
+        div container-3 
+//- ejemplo
+ul 
+    li 
+    li 
+    li 
+    li 
+br
+
+p los atributos se colocan entre parentesis 
+
+p atributo de enlace 
+a(href="#") nombre del enlace 
+
+p mas de un atributo se separa con comas o espacios 
+img(src="foto.png", alt="foto")
+
+img(src="foto.png" alt="foto")
+
+p definir id y clases
+.clase1
+    .clase2
+
+p multiples clases
+button.btn.btn-success 
+
+p id
+#id-1 
+    #id-2 
+
+p Intercalar selectores - se usa un pipe | y se identa, tanto el selector como el pipe  
+
+p Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium aspernatur magnam placeat beatae, 
+    a(href="") quaerat 
+    |fuga error dolorum, esse ullam enim suscipit. Culpa rem eum illum pariatur. Alias accusamus ad inventore!
+
+p como opcion a la identacion se puede usar :+espacio
+ul.menu: li.menu__item: a(href="#").menu__link item 1 
+
+p insertar codigo CSS
+p llamando el archivo externo
+link(rel="stylesheet", href="styles.css")
+
+p estilos integrados en html 
+style.
+    body {
+        background-color: white;
+    }
+
+p css inline - se escribe el selector y sin dejar espacion se agrega el style, para agregar mas de una propiedad se deben colocar dentro de las comillas, como un string
+header(style={"background-color": "white", "margin-bottom":"1em"})
+
+p insertar javascript
+script.
+    const alert = () =>{
+        alert("Hola Mundo")
+    }
+
+p insertar script
+script(src="main.js")
+
+p agregar variables, para agregar una variable let se debe agregar un guion delante, sino, lo tomara como un selector
+-let value="7"
+
+p si no va a cambiar el valor podemos usar const
+-const name="Miguel"
+
+p interpolacion 
+p hola #{name}
+
+p manejo basico de arrays 
+-const numbers = [1,2,3,4,5]
+
+ul
+    li= numbers[0]
+    li= numbers[1]
+    li= numbers[2]
+    li= numbers[3]
+    li= numbers[4]
+
+p manejo de objetos, se debe colocar un guion + un salto de linea + identacion 
+
+-
+    const persona = {
+        name: "miguel",
+        lastname: "navas",
+        age: 7
+    }
+
+p leer el objeto 
+
+ul
+    li= persona.name
+    li= persona.lastname 
+    li= persona.age
+
+p o
+
+ul
+    li= persona["name"]
+    li= persona["lastname"] 
+    li= persona["age"]
+
+p Interpolacion de valores 
+p= `${persona.name} ${persona.lastname} tiene ${persona.age} años`
+
+h3 Condicionales en Pug 
+
+-let username = true 
+
+if username 
+    p Bienvenido usuario 
+else if username == null
+    p username no existe 
+else
+    p Registrese para continuar
+
+//- p Operador ternario 
+
+//- -let username = true 
+//- p (class= username ? 'registered' : 'unregistered')
+
+//- p operador de negacion - para validar que un elemento es false
+
+//- -let username = false 
+//- if !username
+//-     p Registrese
+//- else 
+//-     p bienvenido
+
+//- p o 
+
+//- -let username = false 
+//- unless username
+//-     p registrese para continuar
+
+h3 Bucles en Pug
+
+-const names = ['name1', 'name2', 'name3', 'name4']
+each name in names
+    p= name
+
+    //- p= `${name-charAt(0).toUpperCase()}${name.substring(1)}`
+
+p si el array estuviera vacio 
+//- each name in names.length ? names : ['no names']
+
+p tambien 
+
+//- each name in names 
+//-  p= p= `${name-charAt(0).toUpperCase()}${name.substring(1)}`
+//- else 
+//-     p no names
+p recorrer un objeto
+-
+    const person = {
+        name: 'foo',
+        email: 'correo@email.com'
+    }
+
+each value in person 
+    p= value
+
+//- p ó
+
+each value, key in person 
+    p= '${key}: ${value}'
+
+each value, index in names 
+    p= '${index}: ${value}'
+
+p bucle while 
+
+- var n = 0;
+ul
+  while n < 4
+    li= n++
+
+p Templates 
+
+//- estructura de carpetas 
+//- dev 
+//-     pages dentro el index.pug
+//-     templates templates.pug
+
+p usar templates es util para modularizar el codigo
+p se divide el codigo en secciones que al final se compilan en un solo archivo 
+p el archivo final simplemente debe tener las extensiones hacia los otros archivos .pug 
+p extends + la ruta de carpetas/nombredelarchivo sin la extension
+p no se pueden agregar codigo despues de agregar un extends, solo se puede agregar block o mixin de pug
+
+h3 Bloques 
+p en el archivo donde esta el codigo, del cual hacemos el extends, alli se debe se debe colocar block y el nombre del block, por ejemplo, block main 
+p en el archivo que estamos extendiendo usamos block main y alli se crea el codgio que queramos añadir 
+p cualquier archivo que extienda del template, usando block, se puede crear los distintos modulos de codigo que se necesiten 
+p en el template podemos definir un selector y debajo el block 
+p header con la clase x y dentro (identado) block con el nombre 
+header.header 
+    block header 
+block content 
+block footer
+p despues del extends e invocar el block el codigo ira dentro de las etiquetas header
+
+h3 Otra funcionalidad de los bloques 
+p un block puede contener valor por defecto y este se aplicara al archivo que lo extienda siempre y cuando no se haya iniciado el block, tendria que comentar el block para que se aplique el codigo por defecto, al agregar codigo en el archivo .pug del cual estamos extendiendo, se perdera el codigo por defecto declarado en el block
+p para conservar el codigo tendremos que usar append, ej append header, esto traera el codigo por defecto de ese block y permitira crear codigo posterior
+p si se desea que el codigo por defecto se ejecute antes del codigo posterior, debemos usar prepend
+p se puede escribir tambien block append header o block prepend header
+h3 Includes en pug 
+p se usan para incluir archivos dentro de otros archivos
+p se define el codigo generalmente en un archivo config dentro de un folder config
+p generalmente el template base lo incluye, asi include + la ruta, y desde el archivo que extiende de otro hacemos uso de ese codigo
+h3 Mixins en Pug 
+p son funciones para reutilizar condigo pug 
+p se inicia con mixin mas un nombre para el mixin, tambien puede recibir parametros 
+//- mixin link(href, text)
+//-     a(href= href)=text
+p luego se puede incluir, incluso directamente en el index.pug 
+p para usarlo se escribe +nombre del mixin(los parametros que se hayan definido)
+p +link('/url', 'contacto')
+//- ej 
+//- mixin list(elements)
+//-     each item in elements 
+//-         li= item
+//- se incluye en un archivo
+//- si ya hay un array definido creamos una estructura, por ejemplo un ul y dentro se invoca el mixin 
+//- block main
+//-     ul
+//-         +list(names)

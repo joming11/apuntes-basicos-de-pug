@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apuntes de Pug</title>
+  </head>
+  <body></body>
+  <h1>Apuntes de Pug</h1>
+</html>
+<p>Pug es un motor de plantillas o template engine basado en javascript</p>
+<p>Sintaxis amigable ya que no hay etiquetas</p>
+<p>Las identaciones forman parte de la sintaxis </p>
+<p>Integracion total con node y con otras tecnologias de Js como react </p>
+<p>Soporta completamente HTML</p><br>
+<h2>Sintaxis de Pug</h2>
+<p>se escribe el selector y se agrega el contenido, no es necesario colocar ninguna etiqueta </p>
+<p>para definir que un elemento es hijo de otro, simplemente se usa la identacion </p>
+<h1>Hola<span>mundo </span></h1>
+<p>no hay limite de identaciones </p>
+<div>container 
+  <div>container-2 
+    <div>container-3 </div>
+  </div>
+</div>
+<ul> 
+  <li> </li>
+  <li> </li>
+  <li> </li>
+  <li> </li>
+</ul><br>
+<p>los atributos se colocan entre parentesis </p>
+<p>atributo de enlace </p><a href="#">nombre del enlace </a>
+<p>mas de un atributo se separa con comas o espacios </p><img src="foto.png" alt="foto"><img src="foto.png" alt="foto">
+<p>definir id y clases</p>
+<div class="clase1">
+  <div class="clase2"></div>
+</div>
+<p>multiples clases</p>
+<button class="btn btn-success"> </button>
+<p>id</p>
+<div id="id-1"> 
+  <div id="id-2"> </div>
+</div>
+<p>Intercalar selectores - se usa un pipe | y se identa, tanto el selector como el pipe  </p>
+<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium aspernatur magnam placeat beatae, <a href="">quaerat </a>fuga error dolorum, esse ullam enim suscipit. Culpa rem eum illum pariatur. Alias accusamus ad inventore!</p>
+<p>como opcion a la identacion se puede usar :+espacio</p>
+<ul class="menu">
+  <li class="menu__item"><a class="menu__link" href="#">item 1 </a></li>
+</ul>
+<p>insertar codigo CSS</p>
+<p>llamando el archivo externo</p>
+<link rel="stylesheet" href="styles.css">
+<p>estilos integrados en html </p>
+<style>
+  body {
+      background-color: white;
+  }
+  
+</style>
+<p>css inline - se escribe el selector y sin dejar espacion se agrega el style, para agregar mas de una propiedad se deben colocar dentro de las comillas, como un string</p>
+<header style="background-color:white;margin-bottom:1em;"></header>
+<p>insertar javascript</p>
+<script>
+  const alert = () =>{
+      alert("Hola Mundo")
+  }
+  
+</script>
+<p>insertar script</p>
+<script src="main.js"></script>
+<p>agregar variables, para agregar una variable let se debe agregar un guion delante, sino, lo tomara como un selector</p>
+<p>si no va a cambiar el valor podemos usar const</p>
+<p>interpolacion </p>
+<p>hola Miguel</p>
+<p>manejo basico de arrays </p>
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+<p>manejo de objetos, se debe colocar un guion + un salto de linea + identacion </p>
+<p>leer el objeto </p>
+<ul>
+  <li>miguel</li>
+  <li>navas</li>
+  <li>7</li>
+</ul>
+<p>o</p>
+<ul>
+  <li>miguel</li>
+  <li>navas</li>
+  <li>7</li>
+</ul>
+<p>Interpolacion de valores </p>
+<p>miguel navas tiene 7 años</p>
+<h3>Condicionales en Pug </h3>
+<p>Bienvenido usuario </p>
+<h3>Bucles en Pug</h3>
+<p>name1</p>
+<p>name2</p>
+<p>name3</p>
+<p>name4</p>
+<p>si el array estuviera vacio </p>
+<p>tambien </p>
+<p>recorrer un objeto</p>
+<p>foo</p>
+<p>correo@email.com</p>
+<p>${key}: ${value}</p>
+<p>${key}: ${value}</p>
+<p>${index}: ${value}</p>
+<p>${index}: ${value}</p>
+<p>${index}: ${value}</p>
+<p>${index}: ${value}</p>
+<p>bucle while </p>
+<ul>
+  <li>0</li>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+</ul>
+<p>Templates </p>
+<p>usar templates es util para modularizar el codigo</p>
+<p>se divide el codigo en secciones que al final se compilan en un solo archivo </p>
+<p>el archivo final simplemente debe tener las extensiones hacia los otros archivos .pug </p>
+<p>extends + la ruta de carpetas/nombredelarchivo sin la extension</p>
+<p>no se pueden agregar codigo despues de agregar un extends, solo se puede agregar block o mixin de pug</p>
+<h3>Bloques </h3>
+<p>en el archivo donde esta el codigo, del cual hacemos el extends, alli se debe se debe colocar block y el nombre del block, por ejemplo, block main </p>
+<p>en el archivo que estamos extendiendo usamos block main y alli se crea el codgio que queramos añadir </p>
+<p>cualquier archivo que extienda del template, usando block, se puede crear los distintos modulos de codigo que se necesiten </p>
+<p>en el template podemos definir un selector y debajo el block </p>
+<p>header con la clase x y dentro (identado) block con el nombre </p>
+<header class="header"> 
+</header>
+<p>despues del extends e invocar el block el codigo ira dentro de las etiquetas header</p>
+<h3>Otra funcionalidad de los bloques </h3>
+<p>un block puede contener valor por defecto y este se aplicara al archivo que lo extienda siempre y cuando no se haya iniciado el block, tendria que comentar el block para que se aplique el codigo por defecto, al agregar codigo en el archivo .pug del cual estamos extendiendo, se perdera el codigo por defecto declarado en el block</p>
+<p>para conservar el codigo tendremos que usar append, ej append header, esto traera el codigo por defecto de ese block y permitira crear codigo posterior</p>
+<p>si se desea que el codigo por defecto se ejecute antes del codigo posterior, debemos usar prepend</p>
+<p>se puede escribir tambien block append header o block prepend header</p>
+<h3>Includes en pug </h3>
+<p>se usan para incluir archivos dentro de otros archivos</p>
+<p>se define el codigo generalmente en un archivo config dentro de un folder config</p>
+<p>generalmente el template base lo incluye, asi include + la ruta, y desde el archivo que extiende de otro hacemos uso de ese codigo</p>
+<h3>Mixins en Pug </h3>
+<p>son funciones para reutilizar condigo pug </p>
+<p>se inicia con mixin mas un nombre para el mixin, tambien puede recibir parametros </p>
+<p>luego se puede incluir, incluso directamente en el index.pug </p>
+<p>para usarlo se escribe +nombre del mixin(los parametros que se hayan definido)</p>
+<p>+link('/url', 'contacto')</p>
